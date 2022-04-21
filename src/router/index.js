@@ -21,7 +21,7 @@ const routes = [
   },
   {
     path: "/products",
-    name: "products-all",
+    name: "products",
     component: ProductsIndex,
   },
   { path: "/signup", name: "signup", component: SignupView },

@@ -5,7 +5,7 @@ export default {
   data: function () {
     return {
       message: "Welcome to Vue.js!",
-      products: {},
+      products: [],
     };
   },
   created: function () {
@@ -15,6 +15,8 @@ export default {
     productsIndex() {
       axios.get("/products").then((response) => {
         console.log(response.data);
+        this.products = response.data;
+        console.log(this.products.images);
       });
     },
   },
@@ -22,8 +24,14 @@ export default {
 </script>
 
 <template>
-  <div v-for="product in products" v-bind:key="product.id">
-    <p>Product name {{ product.name }}</p>
+  <div class="home">
+    <h1>All Products</h1>
+    <div v-for="product in products" v-bind:key="product.id">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }} | ${{ product.price }}</p>
+      <p>{{ product.images[0] }}</p>
+      <img v-if="!!product.images[0]" v-bind:src="product.images[0].url" v-bind:alt="product.name" />
+    </div>
   </div>
 </template>
 
